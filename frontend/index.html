@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepGuard AI | Enterprise Deepfake Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="bg-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+
+    <nav class="glass-nav">
+        <div class="logo">
+            <i class="fa-solid fa-shield-halved"></i> DeepGuard <span>AI</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="active">Scanner</a>
+            <a href="#">Social Integration</a>
+            <a href="#">API Docs</a>
+        </div>
+        <div class="nav-actions">
+            <button class="btn-primary">Connect Wallet</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="hero">
+            <h1>Detect the Undetectable.</h1>
+            <p>Multi-modal deepfake detection powered by Spatial Analysis, Temporal Consistency, and rPPG Biological Signals.</p>
+        </header>
+
+        <div class="dashboard">
+            <div class="upload-section glass-panel" id="drop-zone">
+                <input type="file" id="file-input" accept="video/mp4,video/x-m4v,video/*,image/*" hidden>
+                <div class="upload-content">
+                    <div class="upload-icon">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                    </div>
+                    <h3>Drag & Drop Media</h3>
+                    <p>Supports MP4, AVI, WebM, JPG, PNG (Max 50MB)</p>
+                    <button class="btn-outline" onclick="document.getElementById('file-input').click()">Browse Files</button>
+                    
+                    <div class="demo-files">
+                        <p>Or try a demo file:</p>
+                        <div class="demo-buttons">
+                            <button class="demo-btn" data-type="real"><i class="fa-solid fa-check-circle"></i> Authentic.mp4</button>
+                            <button class="demo-btn" data-type="fake"><i class="fa-solid fa-times-circle"></i> Deepfake.mp4</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="analysis-progress hidden" id="progress-container">
+                    <h3>Analyzing Media...</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <p class="progress-status" id="progress-status">Initializing engines...</p>
+                    <div class="scanning-lines"></div>
+                </div>
+            </div>
+
+            <div class="results-section hidden" id="results-container">
+                <div class="glass-panel main-score">
+                    <div class="score-header">
+                        <h2>Authenticity Assessment</h2>
+                        <span class="badge" id="result-badge">Processing</span>
+                    </div>
+                    
+                    <div class="score-display">
+                        <svg class="circular-chart" viewBox="0 0 36 36">
+                            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="circle" id="score-circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <text x="18" y="20.35" class="percentage" id="score-text">0%</text>
+                        </svg>
+                        <div class="score-info">
+                            <h3 id="confidence-text">Authenticity Score</h3>
+                            <p id="verdict-text">Waiting for analysis...</p>
+                        </div>
+                    </div>
+
+                    <div class="explanations" id="explanations-list">
+                        <!-- Explanations populated via JS -->
+                    </div>
+                </div>
+
+                <div class="breakdown-grid">
+                    <div class="glass-panel breakdown-card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-face-viewfinder text-blue"></i>
+                            <h3>Spatial Analysis</h3>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value" id="spatial-score">--</span>
+                            <span class="metric-label">/ 100</span>
+                        </div>
+                        <p class="metric-desc">Microscopic texture & artifact detection (EfficientNet/ViT)</p>
+                    </div>
+
+                    <div class="glass-panel breakdown-card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-film text-purple"></i>
+                            <h3>Temporal Sync</h3>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value" id="temporal-score">--</span>
+                            <span class="metric-label">/ 100</span>
+                        </div>
+                        <p class="metric-desc">Inter-frame consistency & eye-blinking (LSTM/3D-CNN)</p>
+                    </div>
+
+                    <div class="glass-panel breakdown-card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-heart-pulse text-red"></i>
+                            <h3>rPPG Bio-Signals</h3>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value" id="bio-score">--</span>
+                            <span class="metric-label">/ 100</span>
+                        </div>
+                        <p class="metric-desc">Subtle skin color variations from heartbeat pulse</p>
+                    </div>
+
+                    <div class="glass-panel breakdown-card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-file-code text-green"></i>
+                            <h3>Forensic Metadata</h3>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value" id="meta-score">--</span>
+                            <span class="metric-label">/ 100</span>
+                        </div>
+                        <p class="metric-desc">EXIF provenance & generation tool signatures</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel xai-panel">
+                    <div class="xai-header">
+                        <h2>Explainable AI (Grad-CAM)</h2>
+                        <div class="xai-tabs">
+                            <button class="xai-tab active" data-view="heatmap">Heatmap</button>
+                            <button class="xai-tab" data-view="comparison">Comparison</button>
+                        </div>
+                    </div>
+                    <p>Advanced neural activation mapping identifying manipulation boundaries.</p>
+                    <div class="xai-viewer">
+                        <div class="heatmap-container">
+                            <img id="heatmap-img" src="" alt="Grad-CAM Heatmap" style="display: none;">
+                            <div id="heatmap-placeholder" class="placeholder-box">
+                                <i class="fa-solid fa-layer-group"></i>
+                                <span>Heatmap will appear here</span>
+                            </div>
+                        </div>
+                        <div class="comparison-container hidden" id="comparison-view">
+                            <div class="comparison-box">
+                                <span>Original</span>
+                                <img id="original-preview" src="" alt="Original">
+                            </div>
+                            <div class="comparison-box">
+                                <span>Activation Map</span>
+                                <img id="heatmap-preview-side" src="" alt="Heatmap">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script src="js/analyzer.js"></script>
+</body>
+</html>
