@@ -6,7 +6,7 @@ import cv2
 import os
 from pathlib import Path
 
-OUTPUT_DIR = "../frontend/assets"
+OUTPUT_DIR = "assets"
 
 class GradCAM:
     def __init__(self, model, target_layer_name='backbone.conv_head'):
