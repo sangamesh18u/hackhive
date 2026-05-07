@@ -3,3 +3,15 @@ __pycache__/
 *.pyc
 temp_uploads/
 .env
+package-lock.json
+package.json
+node_modules/
+data/
+.venv/
+.venv-1/
+
+# Local runtime + large model artifacts
+backend/uploads/
+frontend/js/assets/
+*.pth
+*.pt
