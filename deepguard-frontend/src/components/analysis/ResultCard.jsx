@@ -47,7 +47,7 @@ export default function ResultCard({ results }) {
         <div className="flex-1 grid grid-cols-2 gap-4 w-full">
           <StatBox
             label="Confidence"
-            value={`${(confidence * 100).toFixed(1)}%`}
+            value={`${confidence.toFixed(1)}%`}
             color="text-indigo-400"
           />
           <StatBox

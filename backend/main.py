@@ -218,9 +218,11 @@ async def analyze_url(request: URLRequest):
         try:
             ydl_opts = {
                 'outtmpl': str(UPLOAD_DIR / f'{job_id}.%(ext)s'),
-                'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4',
+                'format': 'best',
                 'quiet': True,
                 'no_warnings': True,
+                'nocheckcertificate': True,
+                'prefer_ffmpeg': False, # Avoid merge issues if ffmpeg is missing
             }
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(url, download=True)
